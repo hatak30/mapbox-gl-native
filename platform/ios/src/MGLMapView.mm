@@ -2196,8 +2196,8 @@ mbgl::Duration MGLDurationInSeconds(NSTimeInterval duration)
     mbgl::AnimationOptions animationOptions;
     if (duration)
     {
-        animationOptions.duration = MGLDurationInSeconds(duration);
-        animationOptions.easing = MGLUnitBezierForMediaTimingFunction(function);
+        animationOptions.duration.emplace(MGLDurationInSeconds(duration));
+        animationOptions.easing.emplace(MGLUnitBezierForMediaTimingFunction(function));
     }
     if (completion)
     {
