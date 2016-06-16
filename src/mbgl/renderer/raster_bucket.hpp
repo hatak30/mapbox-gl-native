@@ -2,6 +2,7 @@
 
 #include <mbgl/renderer/bucket.hpp>
 #include <mbgl/util/raster.hpp>
+#include <mbgl/gl/gl_config.hpp>
 
 namespace mbgl {
 
@@ -20,7 +21,8 @@ public:
 
     void setImage(PremultipliedImage);
 
-    void drawRaster(RasterShader&, StaticVertexBuffer&, VertexArrayObject&, gl::ObjectStore&);
+    void bindTextures(gl::Config&, gl::ObjectStore&);
+    void drawRaster(RasterShader&, StaticRasterVertexBuffer&, VertexArrayObject&, gl::ObjectStore&);
 
     Raster raster;
 };

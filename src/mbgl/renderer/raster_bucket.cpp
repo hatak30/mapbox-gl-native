@@ -29,10 +29,16 @@ void RasterBucket::setImage(PremultipliedImage image) {
     raster.load(std::move(image));
 }
 
-void RasterBucket::drawRaster(RasterShader& shader, StaticVertexBuffer &vertices, VertexArrayObject &array, gl::ObjectStore& store) {
+void RasterBucket::bindTextures(gl::Config& config, gl::ObjectStore& store) {
+    config.activeTexture = GL_TEXTURE0;
     raster.bind(true, store);
+    config.activeTexture = GL_TEXTURE1;
+    raster.bind(true, store);
+}
+
+void RasterBucket::drawRaster(RasterShader& shader, StaticRasterVertexBuffer&vertices, VertexArrayObject &array, gl::ObjectStore& store) {
     array.bind(shader, vertices, BUFFER_OFFSET_0, store);
-    MBGL_CHECK_ERROR(glDrawArrays(GL_TRIANGLES, 0, (GLsizei)vertices.index()));
+    MBGL_CHECK_ERROR(glDrawArrays(GL_TRIANGLE_STRIP, 0, (GLsizei)vertices.index()));
 }
 
 bool RasterBucket::hasData() const {

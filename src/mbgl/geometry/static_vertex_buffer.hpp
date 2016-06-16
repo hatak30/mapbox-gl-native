@@ -2,6 +2,7 @@
 
 #include <mbgl/geometry/buffer.hpp>
 
+#include <array>
 #include <vector>
 #include <cstddef>
 #include <cstdint>
@@ -26,7 +27,7 @@ class StaticRasterVertexBuffer : public Buffer<
 > {
 public:
     using VertexType = int16_t;
-    StaticRasterVertexBuffer(std::initializer_list<std::tuple<VertexType, VertexType, VertexType, VertexType>>);
+    StaticRasterVertexBuffer(std::initializer_list<std::array<VertexType, 4>>);
 };
 
 } // namespace mbgl

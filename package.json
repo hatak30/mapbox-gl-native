@@ -21,7 +21,7 @@
     "csscolorparser": "^1.0.2",
     "ejs": "^2.4.1",
     "express": "^4.11.1",
-    "mapbox-gl-shaders": "mapbox/mapbox-gl-shaders#59e998295d548f208ee3ec10cdd21ff2630e2079",
+    "mapbox-gl-shaders": "mapbox/mapbox-gl-shaders#27fdfc994df4704bfe55144f9b5e25ae9e5afa4d",
     "mapbox-gl-style-spec": "mapbox/mapbox-gl-style-spec#194fc55b6a7dd54c1e2cf2dd9048fbb5e836716d",
     "mapbox-gl-test-suite": "mapbox/mapbox-gl-test-suite#3a6baea2f364410e6d0873b71babfe0484870a72",
     "node-gyp": "^3.3.1",

@@ -20,8 +20,10 @@ void Painter::renderRaster(RasterBucket& bucket,
     if (bucket.hasData()) {
         config.program = rasterShader->getID();
         rasterShader->u_matrix = matrix;
-        rasterShader->u_buffer = 0;
-        rasterShader->u_opacity = properties.rasterOpacity;
+        rasterShader->u_buffer_scale = 1.0f;
+        rasterShader->u_opacity0 = properties.rasterOpacity;
+        rasterShader->u_opacity1 = 1.0f - properties.rasterOpacity;
+
         rasterShader->u_brightness_low = properties.rasterBrightnessMin;
         rasterShader->u_brightness_high = properties.rasterBrightnessMax;
         rasterShader->u_saturation_factor = saturationFactor(properties.rasterSaturation);
@@ -30,14 +32,18 @@ void Painter::renderRaster(RasterBucket& bucket,
 
         config.stencilTest = GL_FALSE;
 
-        rasterShader->u_image = 0;
-        config.activeTexture = GL_TEXTURE0;
+        rasterShader->u_image0 = 0; // GL_TEXTURE0
+        rasterShader->u_image1 = 1; // GL_TEXTURE1
+        rasterShader->u_tl_parent = {{ 0.0f, 0.0f }};
+        rasterShader->u_scale_parent = 1.0f;
 
         config.depthFunc.reset();
         config.depthTest = GL_TRUE;
         config.depthMask = GL_FALSE;
         setDepthSublayer(0);
-        bucket.drawRaster(*rasterShader, tileStencilBuffer, coveringRasterArray, store);
+
+        bucket.bindTextures(config, store);
+        bucket.drawRaster(*rasterShader, rasterBoundsBuffer, coveringRasterArray, store);
     }
 }
 

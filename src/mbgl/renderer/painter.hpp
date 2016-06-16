@@ -212,7 +212,7 @@ private:
     std::unique_ptr<CircleShader> circleShader;
 
     // Set up the stencil quad we're using to generate the stencil mask.
-    StaticVertexBuffer tileStencilBuffer = {
+    StaticVertexBuffer tileStencilBuffer {
         // top left triangle
         { 0, 0 },
         { util::EXTENT, 0 },
@@ -224,13 +224,20 @@ private:
         { util::EXTENT, util::EXTENT },
     };
 
+    StaticRasterVertexBuffer rasterBoundsBuffer {
+        {{ 0, 0, 0, 0 }},
+        {{ util::EXTENT, 0, 32767, 0 }},
+        {{ 0, util::EXTENT, 0, 32767 }},
+        {{ util::EXTENT, util::EXTENT, 32767, 32767 }},
+    };
+
     VertexArrayObject coveringPlainArray;
     VertexArrayObject coveringRasterArray;
     VertexArrayObject backgroundPatternArray;
     VertexArrayObject backgroundArray;
 
     // Set up the tile boundary lines we're using to draw the tile outlines.
-    StaticVertexBuffer tileBorderBuffer = {
+    StaticVertexBuffer tileBorderBuffer {
         { 0, 0 },
         { util::EXTENT, 0 },
         { util::EXTENT, util::EXTENT },
