@@ -15,9 +15,18 @@ class StaticVertexBuffer : public Buffer<
     32 // default length
 > {
 public:
-    typedef int16_t vertex_type;
+    using VertexType = int16_t;
+    StaticVertexBuffer(std::initializer_list<std::pair<VertexType, VertexType>>);
+};
 
-    StaticVertexBuffer(std::initializer_list<std::pair<int16_t, int16_t>> init);
+class StaticRasterVertexBuffer : public Buffer<
+    8, // bytes per vertex (4 * signed short == 8 bytes)
+    GL_ARRAY_BUFFER,
+    32 // default length
+> {
+public:
+    using VertexType = int16_t;
+    StaticRasterVertexBuffer(std::initializer_list<std::tuple<VertexType, VertexType, VertexType, VertexType>>);
 };
 
 } // namespace mbgl

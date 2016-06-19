@@ -6,7 +6,7 @@
 namespace mbgl {
 
 class RasterShader;
-class StaticVertexBuffer;
+class StaticRasterVertexBuffer;
 class VertexArrayObject;
 
 class RasterBucket : public Bucket {
